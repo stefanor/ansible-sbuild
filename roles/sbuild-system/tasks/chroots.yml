@@ -1,0 +1,18 @@
+- name: Create root's mk-sbuild.rc
+  copy:
+    src: mk-sbuild.rc
+    dest: /root/.mk-sbuild.rc
+
+- name: Create root's mk-sbuild.conf.lvm-snapshot
+  copy:
+    src: mk-sbuild.schroot.conf.lvm-snapshot
+    dest: /root/.mk-sbuild.schroot.conf.lvm-snapshot
+
+- name: List existing chroots
+  command: schroot --list --all-source-chroots
+  register: existing_schroots
+
+- name: Create chroot
+  command: mk-sbuild {{ item|regex_replace('-.*', '') }} --arch={{ item|regex_replace('.*-', '') }}
+  with_items: chroots
+  when: "'source:%s' % item not in existing_schroots.stdout.split()"

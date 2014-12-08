@@ -1,0 +1,6 @@
+chroots:
+  - unstable-amd64
+  - unstable-i386
+  - unstable-arm64
+  # Debian bug #762280
+  # - trusty-amd64

@@ -1,0 +1,24 @@
+[CHROOT_NAME-interactive]
+description=CHROOT_NAME
+groups=sbuild
+root-groups=admin
+source-root-users=root
+source-root-groups=admin
+type=SCHROOT_TYPE
+command-prefix=eatmydata
+device=CHROOT_PATH
+mount-options=-o noatime
+lvm-snapshot-options=--size SNAPSHOT_SIZE
+
+[CHROOT_NAME]
+description=CHROOT_NAME
+groups=sbuild
+root-groups=admin
+source-root-users=root
+source-root-groups=admin
+type=SCHROOT_TYPE
+profile=sbuild
+command-prefix=eatmydata
+device=CHROOT_PATH
+mount-options=-o noatime
+lvm-snapshot-options=--size SNAPSHOT_SIZE

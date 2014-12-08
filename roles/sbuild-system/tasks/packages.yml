@@ -1,0 +1,37 @@
+- name: Update apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 86400
+
+- name: Install necessary packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - nullmailer
+    - debian-archive-keyring
+    - lvm2
+    - qemu-user-static
+    - sbuild
+    - ubuntu-archive-keyring
+
+- name: Install nice-to-have packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - bzr
+    - bzr-builddeb
+    - git
+    - git-buildpackage
+    - haveged
+    - lintian
+    - mercurial
+    - mosh
+    - screen
+    - subversion
+    - svn-buildpackage
+    - tmux
+    - vim-nox
+
+# We use mk-sbuild:
+- name: Install ubuntu-dev-tools
+  apt: name=ubuntu-dev-tools install_recommends=no

@@ -1,0 +1,29 @@
+- name: Create ~/.sbuildrc
+  template:
+    src: sbuildrc
+    dest: ~/.sbuildrc
+
+- name: Create log directory
+  file:
+    path: /home/{{ ansible_user_id }}/sbuild-logs
+    state: directory
+
+- name: Create GnuPG directory
+  file:
+    path: /home/{{ ansible_user_id }}/.gnupg
+    state: directory
+
+- name: Check if we need to generate an sbuild keypair
+  stat:
+    path: /var/lib/sbuild/apt-keys/sbuild-key.pub
+  register: sbuild_key_st
+
+- name: Generate an sbuild keypair
+  command: sbuild-update --keygen
+  when: not sbuild_key_st.stat.exists
+
+- name: Export DEB_BUILD_OPTIONS from ~/.bashrc
+  lineinfile:
+    dest: /home/{{ ansible_user_id }}/.bashrc
+    regexp: ^(export )?DEB_BUILD_OPTIONS=
+    line: export DEB_BUILD_OPTIONS=parallel={{ ansible_processor_vcpus }}

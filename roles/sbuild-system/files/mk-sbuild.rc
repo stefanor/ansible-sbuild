@@ -1,0 +1,13 @@
+EATMYDATA=1
+DEBOOTSTRAP_INCLUDE=vim-tiny
+
+if [ "$DISTRO" = "debian" ]; then
+	DEBOOTSTRAP_MIRROR="http://cloudfront.debian.net/debian/"
+elif [ "$DISTRO" = "ubuntu" ]; then
+	DEBOOTSTRAP_MIRROR="http://us.archive.ubuntu.com/ubuntu/"
+fi
+
+# LVM:
+VG=sbuild
+LV_SIZE=10G
+SNAPSHOT_SIZE=10G

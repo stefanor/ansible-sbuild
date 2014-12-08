@@ -1,0 +1,14 @@
+# See http://docs.ansible.com/ec2_module.html for details of these
+# configuration parameters
+ec2_config:
+  key_name:
+  # Ubuntu: https://cloud-images.ubuntu.com/locator/ec2/
+  # Debian: https://wiki.debian.org/Cloud/AmazonEC2Image
+  image: ami-44e9752c
+  ssh_user: ubuntu
+  region: us-east-1
+  vpc_subnet_id:
+  group_id:
+  # A reasonable size instance, that is often cheap in the spot market
+  instance_type: r3.xlarge
+  spot_price: 0.05

@@ -1,0 +1,4 @@
+- include: packages.yml
+- include: lvm.yml
+- include: permissions.yml
+- include: chroots.yml

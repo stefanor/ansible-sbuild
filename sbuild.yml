@@ -1,0 +1,8 @@
+- hosts: sbuild
+  sudo: true
+  roles:
+    - sbuild-system
+
+- hosts: sbuild
+  roles:
+    - sbuild-user

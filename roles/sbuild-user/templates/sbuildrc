@@ -1,0 +1,41 @@
+# Mail address where logs are sent to (mandatory, no default!)
+$mailto = '{{ ansible_user_id }}';
+
+# Skip signature:
+$pgp_options = ['-us', '-uc'];
+
+# Directory for writing build logs to
+$log_dir = '/home/{{ ansible_user_id }}/sbuild-logs';
+
+# When to purge the build dependencies after a build; possible values are
+# "never", "successful", and "always"
+$purge_build_deps = 'successful';
+
+# When to purge the build directory after a build; possible values are
+# "never", "successful", and "always"
+$purge_build_directory = 'successful';
+
+# Purge the schroot session following a build.
+# This is useful in conjunction with the --purge and --purge-deps options when
+# using snapshot chroots, since by default the snapshot will be deleted.
+# Possible values # are "always" (default), "never", and "successful"
+$purge_session = 'successful';
+
+# Directory for chroot symlinks and sbuild logs.  Defaults to the
+# current directory if unspecified.
+#$build_dir = '/home/{{ ansible_user_id }}/sbuild-builds';
+
+# Force APT to accept unauthenticated packages.  By default,
+# unauthenticated packages are not allowed.  This is to keep the build
+# environment secure, using apt-secure(8).  By setting this to 1,
+# APT::Get::AllowUnauthenticated is set to "true" when running apt-get.
+# This is disabled by default: only enable it if you know what you are
+# doing.
+#$apt_allow_unauthenticated = 1;
+
+# Lintian
+$lintian_opts = ['-IvE', '--pedantic'];
+$run_lintian = 1;
+
+# don't remove this, Perl needs it:
+1;

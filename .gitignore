@@ -1,0 +1,3 @@
+.*.tmp
+/ec2-config.yml
+/hosts

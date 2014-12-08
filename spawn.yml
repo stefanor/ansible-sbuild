@@ -1,0 +1,51 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - ec2-config.yml
+
+  tasks:
+    - name: Provision an ec2 instances
+      ec2:
+        group_id: "{{ ec2_config.group_id }}"
+        image: "{{ ec2_config.image }}"
+        instance_type: "{{ ec2_config.instance_type }}"
+        key_name: "{{ ec2_config.key_name }}"
+        region: "{{ ec2_config.region }}"
+        spot_price: "{{ ec2_config.spot_price }}"
+        vpc_subnet_id: "{{ ec2_config.vpc_subnet_id }}"
+        assign_public_ip: true
+        volumes:
+          - device_name: /dev/sdb
+            ephemeral: ephemeral0
+          - device_name: /dev/sdc
+            ephemeral: ephemeral1
+          - device_name: /dev/sdd
+            ephemeral: ephemeral2
+          - device_name: /dev/sde
+            ephemeral: ephemeral3
+        wait: true
+        count: 1
+        count_tag:
+          Name: sbuild
+        instance_tags:
+          Name: sbuild
+      register: ec2
+
+    - name: Add all instance public IPs to host group
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: sbuild
+        ansible_ssh_user: "{{ ec2_config.ssh_user }}"
+      with_items: ec2.instances
+
+    - name: Wait for SSH to come up
+      wait_for:
+        host: "{{ item.public_dns_name }}"
+        port: 22
+        delay: 60
+        timeout: 320
+        state: started
+      with_items: ec2.instances
+
+- include: sbuild.yml
