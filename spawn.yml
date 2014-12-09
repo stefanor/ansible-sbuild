@@ -12,7 +12,7 @@
         instance_type: "{{ ec2_config.instance_type }}"
         key_name: "{{ ec2_config.key_name }}"
         region: "{{ ec2_config.region }}"
-        spot_price: "{{ ec2_config.spot_price }}"
+        spot_price: "{{ ec2_config.spot_price|default(none) }}"
         vpc_subnet_id: "{{ ec2_config.vpc_subnet_id }}"
         assign_public_ip: true
         volumes:
@@ -48,4 +48,6 @@
         state: started
       with_items: ec2.instances
 
-- include: sbuild.yml
+- hosts: sbuild
+  roles:
+    - sbuild

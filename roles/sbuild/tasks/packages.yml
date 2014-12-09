@@ -1,9 +1,11 @@
 - name: Update apt cache
+  sudo: yes
   apt:
     update_cache: true
     cache_valid_time: 86400
 
 - name: Install necessary packages
+  sudo: yes
   apt:
     name: "{{ item }}"
   with_items:
@@ -15,6 +17,7 @@
     - ubuntu-archive-keyring
 
 - name: Install nice-to-have packages
+  sudo: yes
   apt:
     name: "{{ item }}"
   with_items:
@@ -34,4 +37,7 @@
 
 # We use mk-sbuild:
 - name: Install ubuntu-dev-tools
-  apt: name=ubuntu-dev-tools install_recommends=no
+  sudo: yes
+  apt:
+    name: ubuntu-dev-tools
+    install_recommends: false

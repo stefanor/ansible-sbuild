@@ -13,6 +13,12 @@
     path: /home/{{ ansible_user_id }}/.gnupg
     state: directory
 
+- name: Export DEB_BUILD_OPTIONS from ~/.bashrc
+  lineinfile:
+    dest: /home/{{ ansible_user_id }}/.bashrc
+    regexp: ^(export )?DEB_BUILD_OPTIONS=
+    line: export DEB_BUILD_OPTIONS=parallel={{ ansible_processor_vcpus }}
+
 - name: Check if we need to generate an sbuild keypair
   stat:
     path: /var/lib/sbuild/apt-keys/sbuild-key.pub
@@ -21,9 +27,3 @@
 - name: Generate an sbuild keypair
   command: sbuild-update --keygen
   when: not sbuild_key_st.stat.exists
-
-- name: Export DEB_BUILD_OPTIONS from ~/.bashrc
-  lineinfile:
-    dest: /home/{{ ansible_user_id }}/.bashrc
-    regexp: ^(export )?DEB_BUILD_OPTIONS=
-    line: export DEB_BUILD_OPTIONS=parallel={{ ansible_processor_vcpus }}

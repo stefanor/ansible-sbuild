@@ -4,3 +4,4 @@ chroots:
   - unstable-arm64
   # Debian bug #762280
   # - trusty-amd64
+lvm_block_devices: ~

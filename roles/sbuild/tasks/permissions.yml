@@ -1,0 +1,14 @@
+- name: Add user(s) to sbuild group
+  sudo: yes
+  user:
+    append: true
+    groups: sbuild
+    name: "{{ ansible_user_id }}"
+  register: group_membership_added
+
+- name: Force a reconnect, to gain sbuild group membership (this takes 70 seconds)
+  # By default, ansible uses a 60 second persistent control socket
+  command: /bin/sleep 5
+  async: 150
+  poll: 70
+  when: group_membership_added.changed

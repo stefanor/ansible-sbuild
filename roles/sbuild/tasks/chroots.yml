@@ -1,12 +1,12 @@
-- name: Create root's mk-sbuild.rc
+- name: Create ~/.mk-sbuild.rc
   copy:
     src: mk-sbuild.rc
-    dest: /root/.mk-sbuild.rc
+    dest: /home/{{ ansible_user_id }}/.mk-sbuild.rc
 
-- name: Create root's mk-sbuild.conf.lvm-snapshot
+- name: Create ~/.mk-sbuild.conf.lvm-snapshot
   copy:
     src: mk-sbuild.schroot.conf.lvm-snapshot
-    dest: /root/.mk-sbuild.schroot.conf.lvm-snapshot
+    dest: /home/{{ ansible_user_id }}/.mk-sbuild.schroot.conf.lvm-snapshot
 
 - name: List existing chroots
   command: schroot --list --all-source-chroots

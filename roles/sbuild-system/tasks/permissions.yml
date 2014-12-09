@@ -1,8 +1,0 @@
-- name: Add user(s) to sbuild group
-  user:
-    append: true
-    groups: sbuild
-    name: "{{ item }}"
-  with_items:
-    - "{{ ansible_user_id }}"
-    - "{{ ansible_env.SUDO_USER }}"
