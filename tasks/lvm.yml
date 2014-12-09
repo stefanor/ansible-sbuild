@@ -1,3 +1,4 @@
+---
 - name: Ensure no ephemeral disks are mounted
   sudo: yes
   mount:
@@ -5,16 +6,16 @@
     name: /mnt
     src: /dev/{{ item }}
     state: absent
-  with_items: lvm_block_devices or ansible_devices.keys()
-  when: lvm_block_devices or item not in ('sda', 'xvda')
+  with_items: sbuild_lvm_block_devices or ansible_devices.keys()
+  when: sbuild_lvm_block_devices or item not in ('sda', 'xvda')
 
 - name: Create VG
   sudo: yes
   lvg:
     vg: sbuild
     pvs: /dev/{{ item }}
-  with_items: lvm_block_devices or ansible_devices.keys()
-  when: lvm_block_devices or item not in ('sda', 'xvda')
+  with_items: sbuild_lvm_block_devices or ansible_devices.keys()
+  when: sbuild_lvm_block_devices or item not in ('sda', 'xvda')
 
 - name: Create swap LV
   sudo: yes

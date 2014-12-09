@@ -1,3 +1,4 @@
+---
 - name: Create ~/.sbuildrc
   template:
     src: sbuildrc

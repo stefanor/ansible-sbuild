@@ -1,3 +1,4 @@
+---
 - name: Add user(s) to sbuild group
   sudo: yes
   user:

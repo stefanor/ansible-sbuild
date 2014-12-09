@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Stefano Rivera
+  description: Debian/Ubuntu build system (sbuild)
+  company: ~
+  license: ISC
+  min_ansible_version: 1.7
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - packaging
+dependencies: []

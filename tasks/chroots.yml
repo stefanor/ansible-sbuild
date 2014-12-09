@@ -1,3 +1,4 @@
+---
 - name: Create ~/.mk-sbuild.rc
   copy:
     src: mk-sbuild.rc
@@ -14,5 +15,5 @@
 
 - name: Create chroot
   command: mk-sbuild {{ item|regex_replace('-.*', '') }} --arch={{ item|regex_replace('.*-', '') }}
-  with_items: chroots
+  with_items: sbuild_chroots
   when: "'source:%s' % item not in existing_schroots.stdout.split()"

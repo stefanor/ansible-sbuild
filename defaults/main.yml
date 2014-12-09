@@ -1,7 +1,8 @@
-chroots:
+---
+sbuild_chroots:
   - unstable-amd64
   - unstable-i386
   - unstable-arm64
   # Debian bug #762280
   # - trusty-amd64
-lvm_block_devices: ~
+sbuild_lvm_block_devices: ~
