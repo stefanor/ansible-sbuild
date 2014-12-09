@@ -15,7 +15,18 @@
     - lvm2
     - qemu-user-static
     - sbuild
-    - ubuntu-archive-keyring
+
+- name: Install the Ubuntu archive keyring (in Debian)
+  sudo: yes
+  apt:
+    name: ubuntu-archive-keyring
+  when: ansible_distribution == "Debian"
+
+- name: Install the Ubuntu archive keyring (in Ubuntu)
+  sudo: yes
+  apt:
+    name: ubuntu-keyring
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install nice-to-have packages
   sudo: yes
