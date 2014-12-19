@@ -2,5 +2,6 @@
 - include: packages.yml
 - include: lvm.yml
 - include: permissions.yml
+- include: schroot.yml
 - include: sbuild.yml
 - include: chroots.yml

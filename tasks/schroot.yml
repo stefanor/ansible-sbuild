@@ -1,0 +1,7 @@
+---
+- name: "Mount shm in /run (avoiding Debian #762280)"
+  sudo: true
+  replace:
+    dest: /etc/schroot/sbuild/fstab
+    regexp: ^(tmpfs\s+)/dev/shm(\s+.+)$
+    replace: \1/run/shm\2
