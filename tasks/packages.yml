@@ -35,6 +35,7 @@
   with_items:
     - bzr
     - bzr-builddeb
+    - dput-ng
     - git
     - git-buildpackage
     - haveged
