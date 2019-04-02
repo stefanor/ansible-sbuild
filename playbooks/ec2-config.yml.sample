@@ -12,3 +12,8 @@ ec2_config:
   # A reasonable size instance, that is often cheap in the spot market
   instance_type: r3.xlarge
   spot_price: 0.05
+  volumes:
+  - device_name: /dev/sdb
+    delete_on_termination: true
+    volume_type: gp2
+    volume_size: 16

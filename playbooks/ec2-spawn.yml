@@ -15,11 +15,7 @@
         spot_price: "{{ ec2_config.spot_price|default(none) }}"
         vpc_subnet_id: "{{ ec2_config.vpc_subnet_id }}"
         assign_public_ip: true
-        volumes:
-          - device_name: /dev/sdb
-            delete_on_termination: true
-            volume_type: gp2
-            volume_size: 16
+        volumes: "{{ ec2_config.volumes }}"
         wait: true
         count: 1
         count_tag:

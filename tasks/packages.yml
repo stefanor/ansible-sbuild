@@ -37,6 +37,7 @@
     - git
     - git-buildpackage
     - haveged
+    - htop
     - lintian
     - mercurial
     - mosh
