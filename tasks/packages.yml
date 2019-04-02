@@ -8,8 +8,7 @@
 - name: Install necessary packages
   sudo: yes
   apt:
-    name: "{{ item }}"
-  with_items:
+    name:
     - nullmailer
     - debian-archive-keyring
     - lvm2
@@ -31,8 +30,7 @@
 - name: Install nice-to-have packages
   sudo: yes
   apt:
-    name: "{{ item }}"
-  with_items:
+    name:
     - bzr
     - bzr-builddeb
     - dput-ng
