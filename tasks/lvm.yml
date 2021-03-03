@@ -1,6 +1,5 @@
 ---
 - name: Ensure no ephemeral disks are mounted
-  sudo: yes
   mount:
     fstype: ext4
     name: /mnt
@@ -10,7 +9,6 @@
   when: sbuild_lvm_block_devices or item not in ('sda', 'xvda')
 
 - name: Create VG
-  sudo: yes
   lvg:
     vg: sbuild
     pvs: /dev/{{ item }}
@@ -18,19 +16,16 @@
   when: sbuild_lvm_block_devices or item not in ('sda', 'xvda')
 
 - name: Create swap LV
-  sudo: yes
   lvol:
     vg: sbuild
     lv: swap
     size: 5G
 
 - name: Prepare swap LV
-  sudo: yes
   command: mkswap /dev/sbuild/swap
   when: ansible_swaptotal_mb < 1
 
 - name: Add swap LV to fstab
-  sudo: yes
   mount:
     src: /dev/sbuild/swap
     fstype: swap
@@ -39,6 +34,5 @@
     state: present
 
 - name: Mount swap LV
-  sudo: yes
   command: swapon -a
   when: ansible_swaptotal_mb < 1

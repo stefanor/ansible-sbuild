@@ -1,6 +1,5 @@
 ---
 - name: Add user(s) to sbuild group
-  sudo: yes
   user:
     append: true
     groups: sbuild

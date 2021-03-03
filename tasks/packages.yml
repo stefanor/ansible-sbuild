@@ -1,12 +1,10 @@
 ---
 - name: Update apt cache
-  sudo: yes
   apt:
     update_cache: true
     cache_valid_time: 86400
 
 - name: Install necessary packages
-  sudo: yes
   apt:
     name:
     - nullmailer
@@ -16,19 +14,16 @@
     - sbuild
 
 - name: Install the Ubuntu archive keyring (in Debian)
-  sudo: yes
   apt:
     name: ubuntu-archive-keyring
   when: ansible_distribution == "Debian"
 
 - name: Install the Ubuntu archive keyring (in Ubuntu)
-  sudo: yes
   apt:
     name: ubuntu-keyring
   when: ansible_distribution == "Ubuntu"
 
 - name: Install nice-to-have packages
-  sudo: yes
   apt:
     name:
     - bzr
@@ -49,7 +44,6 @@
 
 # We use mk-sbuild:
 - name: Install ubuntu-dev-tools
-  sudo: yes
   apt:
     name: ubuntu-dev-tools
     install_recommends: false

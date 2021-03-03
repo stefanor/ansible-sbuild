@@ -1,7 +1,20 @@
 ---
-- include: packages.yml
-- include: lvm.yml
-- include: permissions.yml
-- include: schroot.yml
-- include: sbuild.yml
-- include: chroots.yml
+- include_tasks: "{{ task_file }}.yml"
+  args:
+    apply:
+      become: yes
+      become_user: root
+  with_items:
+    - packages
+    - lvm
+    - permissions
+    - schroot
+  loop_control:
+    loop_var: task_file
+
+- include_tasks: "{{ task_file }}.yml"
+  with_items:
+    - sbuild
+    - chroots
+  loop_control:
+    loop_var: task_file
