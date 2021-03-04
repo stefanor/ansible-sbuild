@@ -35,3 +35,29 @@
 - name: Mount swap LV
   command: swapon -a
   when: ansible_swaptotal_mb < 1
+
+- name: Create build LV
+  lvol:
+    vg: sbuild
+    lv: build
+    size: 10G
+
+- name: Prepare build LV
+  filesystem:
+    fstype: ext4
+    dev: /dev/sbuild/build
+
+- name: Add build LV to fstab
+  mount:
+    src: /dev/sbuild/build
+    fstype: ext4
+    path: /var/lib/sbuild/build
+    state: mounted
+
+- name: Set sbuild build dir permissions
+  file:
+    path: /var/lib/sbuild/build
+    state: directory
+    owner: sbuild
+    group: sbuild
+    mode: 02770
