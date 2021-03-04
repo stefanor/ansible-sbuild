@@ -6,3 +6,5 @@ sbuild_chroots:
   # Debian bug #762280
   # - trusty-amd64
 sbuild_lvm_block_devices: ~
+sbuild_purge_build_directory: successful
+sbuild_purge_session: successful

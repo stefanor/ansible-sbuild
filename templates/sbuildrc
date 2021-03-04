@@ -9,17 +9,17 @@ $log_dir = '/home/{{ ansible_user_id }}/sbuild-logs';
 
 # When to purge the build dependencies after a build; possible values are
 # "never", "successful", and "always"
-$purge_build_deps = 'successful';
+$purge_build_deps = 'never';
 
 # When to purge the build directory after a build; possible values are
 # "never", "successful", and "always"
-$purge_build_directory = 'successful';
+$purge_build_directory = '{{ sbuild_purge_build_directory }}';
 
 # Purge the schroot session following a build.
 # This is useful in conjunction with the --purge and --purge-deps options when
 # using snapshot chroots, since by default the snapshot will be deleted.
 # Possible values # are "always" (default), "never", and "successful"
-$purge_session = 'successful';
+$purge_session = '{{ sbuild_purge_session }}';
 
 # Directory for chroot symlinks and sbuild logs.  Defaults to the
 # current directory if unspecified.
