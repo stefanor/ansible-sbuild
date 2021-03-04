@@ -26,6 +26,7 @@
 - name: Install nice-to-have packages
   apt:
     name:
+    - autopkgtest
     - bzr
     - bzr-builddeb
     - dput-ng
@@ -36,6 +37,7 @@
     - lintian
     - mercurial
     - mosh
+    - ratt
     - rsync
     - screen
     - subversion
