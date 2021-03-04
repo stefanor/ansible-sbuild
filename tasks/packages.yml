@@ -36,6 +36,7 @@
     - lintian
     - mercurial
     - mosh
+    - rsync
     - screen
     - subversion
     - svn-buildpackage
