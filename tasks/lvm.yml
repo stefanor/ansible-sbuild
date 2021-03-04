@@ -11,8 +11,7 @@
 - name: Create VG
   lvg:
     vg: sbuild
-    pvs: /dev/{{ item }}
-  with_items: "{{ sbuild_lvm_block_devices|default(ansible_devices.keys()) }}"
+    pvs: "{{ sbuild_lvm_block_devices|default(ansible_devices.keys())|map('regex_replace', '^', '/dev/')|join(',') }}"
   when: sbuild_lvm_block_devices or item not in ('sda', 'xvda')
 
 - name: Create swap LV
