@@ -8,3 +8,4 @@ sbuild_chroots:
 sbuild_lvm_block_devices: ~
 sbuild_purge_build_directory: successful
 sbuild_purge_session: successful
+sbuild_shell: false

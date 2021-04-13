@@ -21,6 +21,15 @@ $purge_build_directory = '{{ sbuild_purge_build_directory }}';
 # Possible values # are "always" (default), "never", and "successful"
 $purge_session = '{{ sbuild_purge_session }}';
 
+$external_commands = {
+{% if sbuild_shell %}
+  # Open a shell if the build fails:
+  "chroot-update-failed-commands" => [ [ '%SBUILD_SHELL' ] ],
+  "build-deps-failed-commands" => [ [ '%SBUILD_SHELL' ] ],
+  "build-failed-commands" => [ [ '%SBUILD_SHELL' ] ],
+{% endif %}
+};
+
 # Directory for chroot symlinks and sbuild logs.  Defaults to the
 # current directory if unspecified.
 #$build_dir = '/home/{{ ansible_user_id }}/sbuild-builds';
