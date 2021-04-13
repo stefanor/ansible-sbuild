@@ -4,7 +4,7 @@ DEBOOTSTRAP_INCLUDE=vim-tiny
 if [ "$DISTRO" = "debian" ]; then
 	DEBOOTSTRAP_MIRROR="http://cloudfront.debian.net/debian/"
 elif [ "$DISTRO" = "ubuntu" ]; then
-	case "$ARCH" in
+	case "$CHROOT_ARCH" in
 	i386|amd64)
 		DEBOOTSTRAP_MIRROR="http://us.archive.ubuntu.com/ubuntu/"
 		;;
