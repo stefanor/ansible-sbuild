@@ -13,6 +13,7 @@
         key_name: "{{ ec2_config.key_name }}"
         region: "{{ ec2_config.region }}"
         spot_price: "{{ ec2_config.spot_price|default(none) }}"
+        instance_initiated_shutdown_behavior: "{{ ec2_config.shutdown_behavior|default('stop') }}"
         vpc_subnet_id: "{{ ec2_config.vpc_subnet_id }}"
         assign_public_ip: true
         volumes: "{{ ec2_config.volumes }}"
