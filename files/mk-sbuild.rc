@@ -2,7 +2,15 @@ EATMYDATA=1
 DEBOOTSTRAP_INCLUDE=vim-tiny
 
 if [ "$DISTRO" = "debian" ]; then
-	DEBOOTSTRAP_MIRROR="http://cloudfront.debian.net/debian/"
+	case "$CHROOT_ARCH" in
+	i386|amd64|arm64|armhf|armel|i386|mips64el|mipsel|ppc64el|s390x)
+		DEBOOTSTRAP_MIRROR="http://cloudfront.debian.net/debian/"
+		;;
+	*)
+		DEBOOTSTRAP_MIRROR="http://cloudfront.debian.net/debian-ports/"
+		DEBOOTSTRAP_KEYRING=/usr/share/keyrings/debian-ports-archive-keyring.gpg
+		;;
+	esac
 elif [ "$DISTRO" = "ubuntu" ]; then
 	case "$CHROOT_ARCH" in
 	i386|amd64)

@@ -9,6 +9,7 @@
     name:
     - nullmailer
     - debian-archive-keyring
+    - debian-ports-archive-keyring
     - lvm2
     - qemu-user-static
     - sbuild
