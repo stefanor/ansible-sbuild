@@ -6,23 +6,23 @@
 
   tasks:
     - name: Provision an ec2 instances
-      ec2:
-        group_id: "{{ ec2_config.group_id }}"
-        image: "{{ ec2_config.image }}"
-        instance_type: "{{ ec2_config.instance_type }}"
-        key_name: "{{ ec2_config.key_name }}"
+      amazon.aws.ec2_spot_instance:
+        count: 1
+        launch_specification:
+          image_id: "{{ ec2_config.image_id }}"
+          instance_type: "{{ ec2_config.instance_type }}"
+          key_name: "{{ ec2_config.key_name }}"
+          network_interfaces:
+            - device_index: 0
+              associate_public_ip_address: true
+              groups:
+                - "{{ ec2_config.security_group }}"
+              subnet_id: "{{ ec2_config.vpc_subnet_id }}"
+          block_device_mappings: "{{ ec2_config.block_device_mappings }}"
         region: "{{ ec2_config.region }}"
         spot_price: "{{ ec2_config.spot_price|default(none) }}"
-        instance_initiated_shutdown_behavior: "{{ ec2_config.shutdown_behavior|default('stop') }}"
-        vpc_subnet_id: "{{ ec2_config.vpc_subnet_id }}"
-        assign_public_ip: true
-        volumes: "{{ ec2_config.volumes }}"
-        wait: true
-        count: 1
-        count_tag:
-          Name: sbuild
-        instance_tags:
-          Name: sbuild
+        tags:
+          name: sbuild
       register: ec2
 
     - name: Add all instance public IPs to host group

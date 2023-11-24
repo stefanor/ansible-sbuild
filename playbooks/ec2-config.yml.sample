@@ -4,16 +4,17 @@ ec2_config:
   key_name:
   # Ubuntu: https://cloud-images.ubuntu.com/locator/ec2/
   # Debian: https://wiki.debian.org/Cloud/AmazonEC2Image
-  image: ami-44e9752c
+  image_id: ami-44e9752c
   ssh_user: ubuntu
   region: us-east-1
   vpc_subnet_id:
-  group_id:
+  security_group:
   # A reasonable size instance, that is often cheap in the spot market
   instance_type: r3.xlarge
   spot_price: 0.05
-  volumes:
+  block_device_mappings:
   - device_name: /dev/sdb
-    delete_on_termination: true
-    volume_type: gp2
-    volume_size: 16
+    ebs:
+      delete_on_termination: true
+      volume_type: gp3
+      volume_size: 50
